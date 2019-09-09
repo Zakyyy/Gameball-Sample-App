@@ -54,12 +54,7 @@ class GameballWidget extends Component {
     });
   }
   componentDidMount() {
-    if(this.props){
-      sourceUri = 
-  Platform.OS === 'android'
-    ? 'file:///android_asset/Web.bundle/site/index.html?lang='+this.props.locale+'&apiKey='+this.props.clientId+'&playerId='+this.props.externalId
-    : 'Web.bundle/site/index.html';
-    }
+
     // the listener returns a function you can use to unsubscribe
     this.unsubscribeFromNotificationListener = firebase.notifications().onNotification((notification) => {
       if (Platform.OS === 'android') {
@@ -112,6 +107,12 @@ class GameballWidget extends Component {
     this.urlSub();
   }
   render() {
+    if(this.props){
+      sourceUri = 
+  Platform.OS === 'android'
+    ? 'file:///android_asset/Web.bundle/site/index.html?lang='+this.props.locale+'&apiKey='+this.props.clientId+'&playerId='+this.props.externalId
+    : 'Web.bundle/site/index.html';
+    }
     this.urlSub = firebase.links().onLink((url) => {
       var reqObj = {
         "playerCode": this.getAllUrlParams(url).gbreferral,
@@ -193,7 +194,6 @@ class GameballWidget extends Component {
           }); 
             //alert(url);
         } else {
-          alert("app not from link");
         }
     });
     return (
@@ -220,8 +220,6 @@ class GameballWidget extends Component {
       headers: headers,
       body: JSON.stringify(data)
     }
-    console.log('in fetch');
-    console.log(obj);
     return fetch(url, obj);
   };
 

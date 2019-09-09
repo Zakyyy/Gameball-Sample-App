@@ -13,7 +13,6 @@
     "react-native": "0.60.5",
     "react-native-crypto-js": "^1.0.0",
     "react-native-firebase": "^5.5.6",
-    "react-native-gb-react-library": "*",
     "react-native-nav-tabbar": "0.0.2",
     "react-native-simple-tab": "^1.0.8",
     "react-native-webview": "^6.9.0"
