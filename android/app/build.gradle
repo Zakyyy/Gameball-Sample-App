@@ -160,8 +160,15 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+                        applicationVariants.all { variant ->
+            variant.outputs.all {
+                def appName = "GB_ReactNativeAndroid"
+                outputFileName = appName+"_V${variant.versionName}.apk"
+            }
+}
         }
     }
+
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
