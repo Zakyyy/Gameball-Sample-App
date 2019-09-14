@@ -197,8 +197,8 @@ class GameballWidget extends Component {
         }
     });
     return (
-      <View style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, width: Dimensions.get('window').width, height: Dimensions.get('window').height - 65 }}>
-        { this.props.render == 'true' && 
+      <View style={{ position: 'absolute', zIndex: 999, backgroundColor:'#000',top: 0, bottom: 0, left: 0, right: 0, width: Dimensions.get('window').width, height: Dimensions.get('window').height - 65 }}>
+        { this.props.render == true && 
         <WebView
           ref={(component) => { this.wb = component;}}
           source={{ uri: sourceUri }}

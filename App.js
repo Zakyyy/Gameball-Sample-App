@@ -6,14 +6,14 @@
  * @flow
  */
 
-import React, {Fragment, Component} from 'react';
+import React, { Fragment, Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
   Text,
-  StatusBar,TextInput, Picker, Button 
+  StatusBar, TextInput, Picker, Button
 } from 'react-native';
 import { GameballWidget } from './GbReactLibrary';
 import TabBar from 'react-native-nav-tabbar';
@@ -35,77 +35,91 @@ export default class App extends Component {
       page: 0,
       apiKey: '8fdfd2dffd-9mnvhu25d6c3d',
       playerId: 'matrix',
-      language: 'ar'
+      language: 'ar',
+      show: false
     };
     this.api = new GameballWidget();
+    
+  }
+  onPress(){
+    this.setState({show: true})
   }
   render() {
-    
-    return (
-    <TabBar>
 
-      <TabBar.Item
+    return (
+      <TabBar>
+
+        <TabBar.Item
           icon={require('./images/Home.png')}
           selectedIcon={require('./images/HomeActive.png')}
           title="Home"
-      >
+        >
           <View style={styles.textContent}>
-          <GameballWidget clientId={this.state.apiKey}
+
+            <Text style={styles.welcome}>
+              Gameball Demo
+          </Text>
+            <Text style={{ marginLeft: 10 }}>
+              API Key
+          </Text>
+            <TextInput
+              style={{ height: 40, borderColor: 'gray', borderWidth: 1, margin: 10 }}
+              onChangeText={(text) => this.setState({ text })}
+              value={this.state.apiKey}
+            />
+            <Text style={{ marginLeft: 10 }}>
+              Player ID
+          </Text>
+            <TextInput
+              style={{ height: 40, borderColor: 'gray', borderWidth: 1, margin: 10 }}
+              onChangeText={(text) => this.setState({ text })}
+              value={this.state.playerId}
+            />
+            <Text style={{ marginLeft: 10 }}>
+              Language
+          </Text>
+            <Picker
+              selectedValue={this.state.language}
+              style={{ height: 50, borderColor: 'gray', borderWidth: 1 }}
+              onValueChange={(itemValue, itemIndex) =>
+                this.setState({ language: itemValue })
+              }>
+              <Picker.Item label="English" value="en" />
+              <Picker.Item label="Arabic" value="ar" />
+            </Picker>
+            <Button style={{ position:'absolute', zIndex: 1, width: 40 }}
+          title="Press me"
+          onPress={() => this.onPress()}
+        />
+        {this.state.show ?
+              <GameballWidget style={{ position:'absolute', zIndex: 999 }} clientId={this.state.apiKey}
                 locale={this.state.language}
                 externalId={this.state.playerId}
                 displayName='Pradeep'
                 firstName=''
                 lastName=''
                 dateOfBirth=''
-                gender='' 
-                render='false'>
-              </GameballWidget>
-              <Text style={styles.welcome}>
-                Gameball Demo
-          </Text>
-              <Text style={{ marginLeft: 10 }}>
-                API Key
-          </Text>
-              <TextInput
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1, margin: 10 }}
-                onChangeText={(text) => this.setState({ text })}
-                value={this.state.apiKey}
-              />
-              <Text style={{ marginLeft: 10 }}>
-                Player ID
-          </Text>
-              <TextInput
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1, margin: 10 }}
-                onChangeText={(text) => this.setState({ text })}
-                value={this.state.playerId}
-              />
-              <Text style={{ marginLeft: 10 }}>
-                Language
-          </Text>
-              <Picker
-                selectedValue={this.state.language}
-                style={{ height: 50, borderColor: 'gray', borderWidth: 1 }}
-                onValueChange={(itemValue, itemIndex) =>
-                  this.setState({ language: itemValue })
-                }>
-                <Picker.Item label="English" value="en" />
-                <Picker.Item label="Arabic" value="ar" />
-              </Picker>
+                gender=''
+                render={this.state.show}>
+              </GameballWidget> : null
+            }
+
           </View>
-      </TabBar.Item>
-      <TabBar.Item>
+        </TabBar.Item>
+        <TabBar.Item>
           <View style={styles.textContent}>
-              <Text style={{fontSize: 18}}>Friends</Text>
-  
+            <Text style={{ fontSize: 18 }}>Friends</Text>
+
           </View>
-      </TabBar.Item>
-      <TabBar.Item
+        </TabBar.Item>
+        <TabBar.Item
           icon={require('./images/My.png')}
           selectedIcon={require('./images/MyActive.png')}
           title="Me"
-      >
-                <View style={styles.textContent}>
-              <Text style={{fontSize: 18}}>Me</Text>
+        >
+          <View style={styles.textContent}>
+            <Text style={{ fontSize: 18 }}>Me</Text>
+            {this.state.show &&
               <GameballWidget clientId={this.state.apiKey}
                 locale={this.state.language}
                 externalId={this.state.playerId}
@@ -113,12 +127,13 @@ export default class App extends Component {
                 firstName=''
                 lastName=''
                 dateOfBirth=''
-                gender='' 
-                render='true'>
+                gender=''
+                render={this.state.show}>
               </GameballWidget>
+            }
           </View>
-    </TabBar.Item>
-  </TabBar>)
+        </TabBar.Item>
+      </TabBar>)
   }
 }
 
