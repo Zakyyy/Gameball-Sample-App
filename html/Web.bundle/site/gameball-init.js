@@ -2,7 +2,8 @@ var GbSdkFn = function () {
     this.settings = {
         containerId: 'gb_container_8247439015',
         repeatNotifications: false,
-        mobile: false
+        mobile: false,
+        defaultOpen: true
     };
 	/*
     this.widgetUrl = 'http://localhost:8080/gameball.widget.min.js';
@@ -46,22 +47,20 @@ var GbSdkFn = function () {
 
      //local url
     
+    //his.widgetUrl = 'https://assets.gameball.co/widget/js/gameball.widget.min.js';
    
+  
     
-    
-    
-    
+     
+  
    
    
-
-    
-    //this.widgetUrl = 'https://assets.gameball.co/uat/widget/js/gameball.widget.min.js';
    
-    //this.widgetUrl = '../dist/widget/js/gameball.widget.min.js';
-    
-    
+    //this.widgetUrl = './dist/widget/js/gameball.widget.min.js'; 
+ 
+    //this.widgetUrl = 'https://assets.gameball.co/uat/widget/js/gameball.widget.min.js'; 
+    //this.widgetUrl = '../dist/widget/js/gameball.widget.min.js'; 
     this.widgetUrl = './gameball.widget.min.js';
-
 }
 GbSdkFn.prototype = {
     init: function (settings) {
@@ -120,6 +119,9 @@ GbSdkFn.prototype = {
 
         return window.GbSdk.app.sendEvent(event);
  
+    },
+    toggle: function(e){
+        window.GbSdk.app.toggleWidget(e);
     },
     mclick: function () {
 

@@ -5,6 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>GameBall widget test</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <script>
     function getAllUrlParams(url) {
       // get query string from url (optional) or window
@@ -79,6 +80,7 @@
           DateOfBirth:'',
           Gender:''
         },
+        defaultOpen: true,
 		    locale:getAllUrlParams().lang,
         clientId:getAllUrlParams().apikey
       });
@@ -94,7 +96,11 @@
   <script>
 
   </script>
-
+  <style>
+    .defaultOpened {
+      left: 0 !important;
+    }
+  </style>
 </head>
 
 <body>
