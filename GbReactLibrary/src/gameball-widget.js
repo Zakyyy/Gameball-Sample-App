@@ -5,29 +5,21 @@ import firebase from 'react-native-firebase';
 import CryptoJS from "react-native-crypto-js";
 import Moment from 'moment';
 import GameballSdk from './gameball-sdk';
+import StaticServer from 'react-native-static-server';
+import RNFS from 'react-native-fs';
 
-var params = 'lang=ar';
-var sourceUri = 
-  Platform.OS === 'android'
-    ? 'file:///android_asset/Web.bundle/site/index.html?${params}'
-    : 'Web.bundle/site/index.html';
-
-const injectedJS = `
-  if (!window.location.search) {
-    var link = document.getElementById('progress-bar');
-    link.href = './site/index.html?${params}';
-    link.click();
-  }
-`;
 class GameballWidget extends Component {
 
   baseUrl = 'https://api.gameball.co/api/Integration';
   headers = { contentType: 'application/json', APIKey: '8fdfd2dffd-9mnvhu25d6c3d' };
   salt = '';
   sdk = null;
+  state = {
+    url: null
+  };
   constructor(props) {
     super(props);
-    this.state = {};
+
     this.sdk = new GameballSdk();
     setTimeout(() => {
       this.componentDidMount();
@@ -54,7 +46,13 @@ class GameballWidget extends Component {
     });
   }
   componentDidMount() {
-
+    
+    let path = RNFS.MainBundlePath + '/html';
+    this.server = new StaticServer(8080, path);
+    this.server.start().then(url => {
+      let url2 = url+'/Web.bundle/loader.html';
+      this.setState({ url2 });
+    });
     // the listener returns a function you can use to unsubscribe
     this.unsubscribeFromNotificationListener = firebase.notifications().onNotification((notification) => {
       if (Platform.OS === 'android') {
@@ -107,11 +105,21 @@ class GameballWidget extends Component {
     this.urlSub();
   }
   render() {
+    alert(this.state.url);
     if(this.props){
+      params = "lang=pradeep";
       sourceUri = 
   Platform.OS === 'android'
     ? 'file:///android_asset/Web.bundle/site/index.html?lang='+this.props.locale+'&apiKey='+this.props.clientId+'&playerId='+this.props.externalId
-    : 'Web.bundle/site/index.html';
+    : 'assets/html/Web.bundle/loader.html';
+    var injectedJS = `
+    setTimeout(() => {
+    alert('inside');
+    var link = document.getElementById('progress-bar');
+    link.href = './site/index.html?${params}';
+    link.click();
+  }, 100);
+`;
     }
     this.urlSub = firebase.links().onLink((url) => {
       var reqObj = {
@@ -198,7 +206,17 @@ class GameballWidget extends Component {
     });
     return (
       <View style={{ position: 'absolute', zIndex: 1, backgroundColor:'#000',top: 0, bottom: 0, left: 0, right: 0, width: Dimensions.get('window').width, height: Dimensions.get('window').height - 70 }}>
-        { this.props.render == true && 
+        { this.props.render == true && Platform.OS === 'ios' && this.state.url &&
+        <WebView
+          ref={(component) => { this.wb = component;}}
+          source={{ uri: this.state.url }}
+          javaScriptEnabled={true}
+          injectedJavaScript={injectedJS}
+          originWhitelist={['*']}
+          allowFileAccess={true}
+        />
+      }
+       { this.props.render == true && Platform.OS === 'android' && 
         <WebView
           ref={(component) => { this.wb = component;}}
           source={{ uri: sourceUri }}

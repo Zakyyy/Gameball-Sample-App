@@ -20,6 +20,11 @@
 		59EDF39CCE0351A2364A3908 /* libPods-gbreactexample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 107064AF03307A7C976701A3 /* libPods-gbreactexample.a */; };
 		A4068ADF6B5A5D5899F244E3 /* libPods-gbreactexample-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A26D3855C18E8DB552F5BBE /* libPods-gbreactexample-tvOSTests.a */; };
 		C63D2EB5C1180B710845C689 /* libPods-gbreactexampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1342A0E89CCEC071C3902B18 /* libPods-gbreactexampleTests.a */; };
+		F606EFFF23302A6D0082E34F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F606EFFE23302A6C0082E34F /* GoogleService-Info.plist */; };
+		F6833ADA23301B66001D4A7D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F6833AD923301B66001D4A7D /* GoogleService-Info.plist */; };
+		F6833ADC2330251A001D4A7D /* Downloads in Resources */ = {isa = PBXBuildFile; fileRef = F6833ADB23302519001D4A7D /* Downloads */; };
+		F69350822336938100F9E6FE /* assets in Resources */ = {isa = PBXBuildFile; fileRef = F69350812336938000F9E6FE /* assets */; };
+		F69350842336938E00F9E6FE /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = F69350832336938D00F9E6FE /* main.jsbundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +72,11 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F4DB58EDAC5423E1484D8423 /* Pods-gbreactexampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gbreactexampleTests.debug.xcconfig"; path = "Target Support Files/Pods-gbreactexampleTests/Pods-gbreactexampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F606EFFE23302A6C0082E34F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F6833AD923301B66001D4A7D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F6833ADB23302519001D4A7D /* Downloads */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Downloads; sourceTree = "<group>"; };
+		F69350812336938000F9E6FE /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		F69350832336938D00F9E6FE /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +137,7 @@
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				F6833AD923301B66001D4A7D /* GoogleService-Info.plist */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -161,7 +172,6 @@
 				F4DB58EDAC5423E1484D8423 /* Pods-gbreactexampleTests.debug.xcconfig */,
 				9021B1B641143A0EC6B73A69 /* Pods-gbreactexampleTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -175,6 +185,10 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				F69350832336938D00F9E6FE /* main.jsbundle */,
+				F69350812336938000F9E6FE /* assets */,
+				F606EFFE23302A6C0082E34F /* GoogleService-Info.plist */,
+				F6833ADB23302519001D4A7D /* Downloads */,
 				13B07FAE1A68108700A75B9A /* gbreactexample */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* gbreactexampleTests */,
@@ -308,6 +322,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -336,8 +351,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F69350842336938E00F9E6FE /* main.jsbundle in Resources */,
+				F69350822336938100F9E6FE /* assets in Resources */,
+				F6833ADC2330251A001D4A7D /* Downloads in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				F606EFFF23302A6D0082E34F /* GoogleService-Info.plist in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				F6833ADA23301B66001D4A7D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -816,7 +836,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -862,7 +882,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
