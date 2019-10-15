@@ -5,8 +5,7 @@ import firebase from 'react-native-firebase';
 import CryptoJS from "react-native-crypto-js";
 import Moment from 'moment';
 import GameballSdk from './gameball-sdk';
-import StaticServer from 'react-native-static-server';
-import RNFS from 'react-native-fs';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class GameballWidget extends Component {
 
@@ -21,104 +20,48 @@ class GameballWidget extends Component {
     super(props);
 
     this.sdk = new GameballSdk();
-    setTimeout(() => {
-      this.componentDidMount();
-    }, 1000)
+    this.componentDidMount();
 
   }
-  sendMsgToWebview(){
+  sendMsgToWebview() {
     this.webview.sendMessage('mg to js file')
   }
-  onWebviewMsg(data){
+  onWebviewMsg(data) {
+    console.log("Zaki" + data)
     alert(JSON.stringify(data));
     var data = JSON.parse(data);
     //this.getbotSettings(data);
   }
-  getbotSettings(data){
-    this.GetClientBotSettings(data.url, data.data).then((res) => res.json()).then( (jsondata) => {
+  getbotSettings(data) {
+    this.GetClientBotSettings(data.url, data.data).then((res) => res.json()).then((jsondata) => {
       //alert(JSON.stringify(jsondata));
 
       this.wb.postMessage(JSON.stringify(jsondata.response));
     })
-    .catch((error) => {
-      alert('error');
-      alert(JSON.stringify(error));
-    });
-  }
-  componentDidMount() {
-    
-    let path = RNFS.MainBundlePath + '/html';
-    this.server = new StaticServer(8080, path);
-    this.server.start().then(url => {
-      let url2 = url+'/Web.bundle/loader.html';
-      this.setState({ url2 });
-    });
-    // the listener returns a function you can use to unsubscribe
-    this.unsubscribeFromNotificationListener = firebase.notifications().onNotification((notification) => {
-      if (Platform.OS === 'android') {
-
-        const channel = new firebase.notifications.Android.Channel(
-          'channelOne',
-          'Channel Name',
-          firebase.notifications.Android.Importance.Max
-        ).setDescription('A natural description of the channel');
-        firebase.notifications().android.createChannel(channel);
-        alert(notification.notificationId+'-'+notification.title+'-'+notification.subtitle+'-'+notification.body+'-'+notification.data);
-        const localNotification = new firebase.notifications.Notification({
-            sound: 'default'
-          })
-          .android.setChannelId("channelOne") // e.g. the id you chose above
-          .android.setSmallIcon("@mipmap/ic_launcher") // create this icon in Android Studio
-          .android.setPriority(firebase.notifications.Android.Priority.High)
-          .android.setBigPicture('https://cuppalabs.github.io/img/cuppa-logo-coffee11.png')
-          .setTitle(notification.title)
-          .setTitle(notification.body)
-
-
-        firebase.notifications()
-          .displayNotification(localNotification)
-          .catch(err => console.error(err));
-
-      } else if (Platform.OS === 'ios') {
-
-        const localNotification = new firebase.notifications.Notification()
-          .setNotificationId(notification.notificationId)
-          .setTitle(notification.title)
-          .setSubtitle(notification.subtitle)
-          .setBody(notification.body)
-          .setData(notification.data)
-          .ios.setBadge(notification.ios.badge);
-
-        firebase.notifications()
-          .displayNotification(localNotification)
-          .catch(err => console.error(err));
-
-      }
-    });
-
-    // ...
+      .catch((error) => {
+        alert('error');
+        alert(JSON.stringify(error));
+      });
   }
 
   componentWillUnmount() {
     // this is where you unsubscribe
-    this.unsubscribeFromNotificationListener();
+    // unsubscribe();
     this.urlSub();
   }
   render() {
-    alert(this.state.url);
-    if(this.props){
-      params = "lang=pradeep";
-      sourceUri = 
-  Platform.OS === 'android'
-    ? 'file:///android_asset/Web.bundle/site/index.html?lang='+this.props.locale+'&apiKey='+this.props.clientId+'&playerId='+this.props.externalId
-    : 'assets/html/Web.bundle/loader.html';
-    var injectedJS = `
-    setTimeout(() => {
-    alert('inside');
-    var link = document.getElementById('progress-bar');
-    link.href = './site/index.html?${params}';
-    link.click();
-  }, 100);
+    if (this.props) {
+      params = 'displayName=' + this.props.displayName + '&email=' + this.props.email + '&playerId=' + this.props.playerId + '&gender=' + this.props.gender + '&mobileNumber=' + this.props.mobileNumber + '&apiKey=' + this.props.clientId + '&lang=' + this.props.lang + '&dateOfBirth=' + this.props.dateOfBirth + '&idOnly=' + this.props.idOnly;
+      sourceUri =
+        Platform.OS === 'android'
+          ? 'file:///android_asset/Web.bundle/site/index.html?displayName=' + this.props.displayName + '&email=' + this.props.email + '&playerId=' + this.props.playerId + '&gender=' + this.props.gender + '&mobileNumber=' + this.props.mobileNumber + '&apiKey=' + this.props.clientId + '&lang=' + this.props.lang + '&dateOfBirth=' + this.props.dateOfBirth + '&idOnly=' + this.props.idOnly
+          : 'assets/html/Web.bundle/loader.html';
+      var injectedJS = `
+      if (!window.location.search) {
+        var link = document.getElementById('progress-bar');
+        link.href = './site/index.html?${params}';
+        link.click();
+      }
 `;
     }
     this.urlSub = firebase.links().onLink((url) => {
@@ -154,15 +97,15 @@ class GameballWidget extends Component {
         "isMessageTrigger": true
       }
 
-      this.sdk.addReferral(reqObj,this.headers).then(res => {
+      this.sdk.addReferral(reqObj, this.headers).then(res => {
         alert('Added refrrer successfully');
       }, err => {
         alert('error');
-      }); 
+      });
     });
     firebase.links()
-    .getInitialLink()
-    .then((url) => {
+      .getInitialLink()
+      .then((url) => {
         if (url) {
           var reqObj = {
             "playerCode": this.getAllUrlParams(url).gbreferral,
@@ -195,39 +138,40 @@ class GameballWidget extends Component {
             },
             "isMessageTrigger": true
           };
-          this.sdk.addReferral(reqObj,this.headers).then(res => {
+          this.sdk.addReferral(reqObj, this.headers).then(res => {
             alert('Added refrrer successfully');
           }, err => {
             alert('error');
-          }); 
-            //alert(url);
+          });
+          //alert(url);
         } else {
         }
-    });
+      });
     return (
-      <View style={{ position: 'absolute', zIndex: 1, backgroundColor:'#000',top: 0, bottom: 0, left: 0, right: 0, width: Dimensions.get('window').width, height: Dimensions.get('window').height - 70 }}>
-        { this.props.render == true && Platform.OS === 'ios' && this.state.url &&
-        <WebView
-          ref={(component) => { this.wb = component;}}
-          source={{ uri: this.state.url }}
-          javaScriptEnabled={true}
-          injectedJavaScript={injectedJS}
-          originWhitelist={['*']}
-          allowFileAccess={true}
-        />
-      }
-       { this.props.render == true && Platform.OS === 'android' && 
-        <WebView
-          ref={(component) => { this.wb = component;}}
-          source={{ uri: sourceUri }}
-          javaScriptEnabled={true}
-          originWhitelist={['*']}
-          allowFileAccess={true}
-          onMessage={event => {
-            this.onWebviewMsg(event.nativeEvent.data);
-          }}
-        />
-      }
+      <View style={{ position: 'absolute', zIndex: 1, backgroundColor: '#000', top: 0, bottom: 0, left: 0, right: 0, width: Dimensions.get('window').width, height: Dimensions.get('window').height - 70 }}>
+        {this.props.children}
+        {this.props.render == true && Platform.OS === 'ios' &&
+          <WebView
+            ref={(component) => { this.wb = component; }}
+            source={{ uri: sourceUri }}
+            javaScriptEnabled={true}
+            injectedJavaScript={injectedJS}
+            originWhitelist={['*']}
+            allowFileAccess={true}
+          />
+        }
+        {this.props.render == true && Platform.OS === 'android' &&
+          <WebView
+            ref={(component) => { this.wb = component; }}
+            source={{ uri: sourceUri }}
+            javaScriptEnabled={true}
+            originWhitelist={['*']}
+            allowFileAccess={true}
+            onMessage={event => {
+              this.onWebviewMsg(event.nativeEvent.data);
+            }}
+          />
+        }
       </View>
     );
   }

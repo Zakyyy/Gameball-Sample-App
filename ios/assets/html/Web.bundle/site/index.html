@@ -6,8 +6,10 @@
   <title>GameBall widget test</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <script>
+  
+<script>
     function getAllUrlParams(url) {
+      document.write(window.location.search.slice(1))
       // get query string from url (optional) or window
       var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
 
@@ -19,7 +21,6 @@
 
         // stuff after # is not part of query string, so get rid of it
         queryString = queryString.split('#')[0];
-
         // split our query string into its component parts
         var arr = queryString.split('&');
 
@@ -30,14 +31,13 @@
           // set parameter name and value (use 'true' if empty)
           var paramName = a[0];
           var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
-
           // (optional) keep case consistent
           paramName = paramName.toLowerCase();
           if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
 
           // if the paramName ends with square brackets, e.g. colors[] or colors[2]
           if (paramName.match(/\[(\d+)?\]$/)) {
-
+            return "true";
             // create key if it doesn't exist
             var key = paramName.replace(/\[(\d+)?\]/, '');
             if (!obj[key]) obj[key] = [];
@@ -67,41 +67,39 @@
           }
         }
       }
-
       return obj;
     }
-    window.GbLoadInit = function(){
-      alert('INSIDE INDEX.HTML '+getAllUrlParams().lang);
-      GbSdk.init({
-        user: {
-          playerUniqueId:getAllUrlParams().playerid,
-          DisplayName:'',
-          FirstName:"",
-          LastName:'', 
-          DateOfBirth:'',
-          Gender:''
-        },
-        defaultOpen: true,
-		    locale:getAllUrlParams().lang,
-        clientId:getAllUrlParams().apikey
-      });
-      GbSdk.onInit(function(app){
-        //GbSdk.sendEvent();
-      });
-    }
-    function test(type){
-      GbSdk.sendEvent(type);
-    }
-  </script>
-  <script async defer src="./gameball-init.js"></script>
-  <script>
+  window.GbLoadInit = function(){
+      if (getAllUrlParams().idonly) {
+        GbSdk.init({
+          playerUniqueId: getAllUrlParams().playerid,
+          lang: getAllUrlParams().lang ? getAllUrlParams().lang : 'eng',
+          APIKey: getAllUrlParams().apikey,
+          defaultOpen: true,
+          mobile: true,
+        });
+      } else {
+        GbSdk.init({
+          playerUniqueId: getAllUrlParams().playerid,
 
-  </script>
-  <style>
-    .defaultOpened {
-      left: 0 !important;
-    }
-  </style>
+          playerAttributes: {
+            displayName: getAllUrlParams().displayname,
+            email: getAllUrlParams().email ? getAllUrlParams().email : '',
+            dateOfBirth: getAllUrlParams().dateofbirth ? getAllUrlParams().dateofbirth : '',
+            gender: getAllUrlParams().gender ? getAllUrlParams().gender : '',
+            mobileNumber: getAllUrlParams().mobilenumber ? getAllUrlParams().mobilenumber : '',
+          },
+          lang: getAllUrlParams().lang ? getAllUrlParams().lang : 'eng',
+          APIKey: getAllUrlParams().apikey,
+          defaultOpen: true,
+          mobile: true,
+        });
+      }
+  };
+</script>
+<script defer src="https://assets.gameball.co/uat/widget/js/gameball-init.min.js"></script>
+
+
 </head>
 
 <body>
