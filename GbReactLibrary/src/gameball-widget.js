@@ -20,7 +20,6 @@ class GameballWidget extends Component {
     super(props);
 
     this.sdk = new GameballSdk();
-    this.componentDidMount();
 
   }
   sendMsgToWebview() {
