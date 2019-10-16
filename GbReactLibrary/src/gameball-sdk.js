@@ -26,7 +26,7 @@ class GameballSdk extends Component {
         APIKey: headers,
       }
     };
-    return axios.post(url, data, config).then(res => console.log(res)).catch(err => console.log(err.response))
+    axios.post(url, data, config).then(res => console.log(res)).catch(err => console.log(err.response))
   };
 }
 

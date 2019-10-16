@@ -33,6 +33,7 @@ target 'gbreactexample' do
   pod 'Firebase/Messaging', '~> 6.3.0'
 pod 'RNCPushNotificationIOS', :path => '../node_modules/@react-native-community/push-notification-ios'
   pod 'react-native-static-server', :path => '../node_modules/react-native-static-server'
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons/ios'
 
   pod 'RNFS', :path => '../node_modules/react-native-fs'
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { GameballWidget } from '../../GbReactLibrary';
+import NotificationComponent from '../NotificationComponent';
 
 class ThirdScreen extends Component {
   constructor(props) {
@@ -41,10 +42,10 @@ class ThirdScreen extends Component {
             placeholder="playerId"
           />
           {!this.state.show &&
-          <Button
-            title={"Send Event"}
-            onPress={() => this.sendEventPressFunction()}
-          />}
+            <Button
+              title={"Send Event"}
+              onPress={() => this.sendEventPressFunction()}
+            />}
           {!this.state.show && <Button
             title={"open widget"}
             onPress={() => this.setState({ show: !this.state.show })}
@@ -64,6 +65,7 @@ class ThirdScreen extends Component {
 
           </GameballWidget>
         }
+
       </View>
     )
   }

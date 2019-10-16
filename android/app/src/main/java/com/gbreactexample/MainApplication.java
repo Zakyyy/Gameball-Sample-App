@@ -7,6 +7,7 @@ import com.facebook.react.PackageList;
 import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
 import com.facebook.react.bridge.JavaScriptExecutorFactory;
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.rnfs.RNFSPackage;
 import com.futurepress.staticserver.FPStaticServerPackage;
 import com.facebook.react.ReactNativeHost;
@@ -30,7 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
       @SuppressWarnings("UnnecessaryLocalVariable")
       List<ReactPackage> packages = new PackageList(this).getPackages();
       packages.add(new RNFirebaseLinksPackage());
-       packages.add(new RNFirebaseMessagingPackage());
+//       packages.add(new RNFirebaseMessagingPackage());
        return packages;
     }
 
