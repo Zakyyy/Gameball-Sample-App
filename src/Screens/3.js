@@ -26,7 +26,7 @@ class ThirdScreen extends Component {
   }
   render() {
     return (
-      <View style={{ flex: 1, padding: 20 }}>
+      <View style={{ flex: 1, padding: 20, paddingTop: 50 }}>
         <Text style={{ fontSize: 18 }}> Sending Event</Text>
         <View style={{ paddingTop: 20 }}>
           <TextInput

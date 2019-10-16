@@ -13,7 +13,7 @@ class SecondScreen extends Component {
   }
   render() {
     return (
-      <View style={{ flex: 1, padding: 20 }}>
+      <View style={{ flex: 1, padding: 20, paddingTop: 50 }}>
         {!this.state.show &&<Button
           title={"open widget"}
           onPress={() => this.setState({ show: !this.state.show })}
