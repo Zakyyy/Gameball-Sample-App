@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{18B2EF60-6201-11E9-8576-C1C83423E82C}</ProjectGuid>
+    <ProjectGuid>{D37C6000-C52B-11E9-B4B3-1B7F266F5C32}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gb.React.Library</RootNamespace>

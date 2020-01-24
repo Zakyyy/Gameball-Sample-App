@@ -1,6 +1,4 @@
-
-import { NativeModules } from 'react-native';
-
-const { RNGbReactLibrary } = NativeModules;
-
-export default RNGbReactLibrary;
+import GameballWidget from './src/gameball-widget';
+import * as GameballSdk from './src/gameball-sdk';
+import InAppNotification from './src/inAppNotification';
+export { GameballSdk, InAppNotification, GameballWidget };
