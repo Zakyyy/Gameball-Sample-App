@@ -1,0 +1,32 @@
+{
+  "name": "react-native-static-server",
+  "version": "0.4.2",
+  "summary": "HTTP static file server for React Native",
+  "description": "HTTP static file server for React Native",
+  "license": "MIT",
+  "authors": {
+    "name": "fchasen@gmail.com"
+  },
+  "homepage": "https://github.com/futurepress/react-native-static-server#readme",
+  "source": {
+    "git": "https://github.com/futurepress/react-native-static-server.git"
+  },
+  "requires_arc": true,
+  "platforms": {
+    "ios": "7.0"
+  },
+  "preserve_paths": [
+    "README.md",
+    "package.json",
+    "index.js"
+  ],
+  "source_files": [
+    "ios/*.{h,m}",
+    "ios/GCDWebServer/*/*.{h,m}"
+  ],
+  "dependencies": {
+    "React": [
+
+    ]
+  }
+}
