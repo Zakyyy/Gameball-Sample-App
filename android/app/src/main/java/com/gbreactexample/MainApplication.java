@@ -1,16 +1,22 @@
 package com.gbreactexample;
 
 import android.app.Application;
+import android.util.Log;
 
+import com.facebook.react.PackageList;
+import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
+import com.facebook.react.bridge.JavaScriptExecutorFactory;
 import com.facebook.react.ReactApplication;
-import com.reactnativecommunity.webview.RNCWebViewPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.rnfs.RNFSPackage;
+import com.futurepress.staticserver.FPStaticServerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-
-import java.util.Arrays;
+import io.invertase.firebase.links.RNFirebaseLinksPackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import java.util.List;
+//import com.reactlibrary.RNGbReactLibraryPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -22,10 +28,12 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new RNCWebViewPackage()
-      );
+      @SuppressWarnings("UnnecessaryLocalVariable")
+      List<ReactPackage> packages = new PackageList(this).getPackages();
+      packages.add(new RNFirebaseLinksPackage());
+//      packages.add(new RNGbReactLibraryPackage());
+//       packages.add(new RNFirebaseMessagingPackage());
+       return packages;
     }
 
     @Override
