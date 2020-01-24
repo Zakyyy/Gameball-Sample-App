@@ -57,6 +57,3 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
-
-/GbReactLibrary
-/src/NotificationComponent.js
