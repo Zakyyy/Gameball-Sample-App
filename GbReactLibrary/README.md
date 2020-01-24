@@ -1,53 +1,41 @@
 
-# react-native-gb-react-library
+# react-native-gameball
 
 ## Getting started
 
-`$ npm install react-native-gb-react-library --save`
-
-### Mostly automatic installation
-
-`$ react-native link react-native-gb-react-library`
-
-### Manual installation
-
+`$ npm install --save react-native-gameball`
 
 #### iOS
+1. cd ios  -- navigate to the IOS directory in the project
+2. pod install
+3. cd .. 
 
-1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-gb-react-library` and add `RNGbReactLibrary.xcodeproj`
-3. In XCode, in the project navigator, select your project. Add `libRNGbReactLibrary.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-4. Run your project (`Cmd+R`)<
 
 #### Android
+after installing the package
+open path/to/project/android/app/build.gradle file
+android {
+  ...
+  sourceSets {
+    `main { assets.srcDirs = [‘src/main/assets’, ‘../../html’] }`
+  }
+}
 
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.reactlibrary.RNGbReactLibraryPackage;` to the imports at the top of the file
-  - Add `new RNGbReactLibraryPackage()` to the list returned by the `getPackages()` method
-2. Append the following lines to `android/settings.gradle`:
-  	```
-  	include ':react-native-gb-react-library'
-  	project(':react-native-gb-react-library').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-gb-react-library/android')
-  	```
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
-  	```
-      compile project(':react-native-gb-react-library')
-  	```
+## installation issues
+# IOS issues:
+rnc webview was not found in the uimanager ios
+sol:
+1. check that react-native-webview is installed and in package.json if not install it `npm install --save react-native-webview`
+if not solved
+2. cd ios
+3. pod install
 
-#### Windows
-[Read it! :D](https://github.com/ReactWindows/react-native)
-
-1. In Visual Studio add the `RNGbReactLibrary.sln` in `node_modules/react-native-gb-react-library/windows/RNGbReactLibrary.sln` folder to their solution, reference from their app.
-2. Open up your `MainPage.cs` app
-  - Add `using Gb.React.Library.RNGbReactLibrary;` to the usings at the top of the file
-  - Add `new RNGbReactLibraryPackage()` to the `List<IReactPackage>` returned by the `Packages` method
-
+if the issue still there:
+in the project directory run: `react-native link react-native-webview`
 
 ## Usage
 ```javascript
-import RNGbReactLibrary from 'react-native-gb-react-library';
+import {GameballWidget, GameballSdk, InAppNotification} from 'react-native-gameball';
 
-// TODO: What to do with the module?
-RNGbReactLibrary;
 ```
   

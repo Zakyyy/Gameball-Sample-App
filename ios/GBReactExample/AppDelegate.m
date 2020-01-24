@@ -13,15 +13,17 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <Firebase.h>
-#import <RNFirebaseNotifications.h>
+#import "RNFirebaseLinks.h"
+//#import <RNFirebaseNotifications.h>
 #import <RNCPushNotificationIOS.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [FIROptions defaultOptions].deepLinkURLScheme= @"org.reactNative.gameball.dev";
   [FIRApp configure];
-  [RNFirebaseNotifications configure];
+//  [RNFirebaseNotifications configure];
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"gbreactexample"
@@ -48,6 +50,19 @@
 #endif
 }
 
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            options:(NSDictionary<NSString *, id> *)options {
+    return [[RNFirebaseLinks instance] application:application openURL:url options:options];
+}
+
+- (BOOL)application:(UIApplication *)application
+            continueUserActivity:(nonnull NSUserActivity *)userActivity
+            restorationHandler: (nonnull void (^)(NSArray<id<UIUserActivityRestoring>> *_Nullable))restorationHandler {
+  return [[RNFirebaseLinks instance] application:application
+                                     continueUserActivity:userActivity
+                                     restorationHandler:restorationHandler];
+}
 // Required to register for notifications
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {

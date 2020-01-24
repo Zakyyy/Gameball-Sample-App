@@ -4,56 +4,64 @@ import { Platform } from 'react-native';
 import firebase from 'react-native-firebase';
 import AsyncStorage from '@react-native-community/async-storage';
 import { renderNotification } from './actions/NotificationActions'
+import { connect } from 'react-redux';
 
 const configure = () => {
-  if (Platform.OS === 'ios') {
-    const messaging = firebase.messaging();
-    messaging.hasPermission()
-      .then(enabled => {
-        if (enabled) {
-          messaging.getToken()
-            .then(token => {
-              console.log(token)
-              AsyncStorage.setItem('push_token', token);
-            })
-            .catch(error => console.log(error))
-        } else {
-          messaging.requestPermission()
-            .then(respone => console.log(respone))
-            .catch(error => { return })
-        }
-      })
-      .catch(error => console.log(error))
-  }
+  // if (Platform.OS === 'ios') {
+  //   const messaging = firebase.messaging();
+  //   messaging.hasPermission()
+  //     .then(enabled => {
+  //       if (enabled) {
+  //         messaging.getToken()
+  //           .then(token => {
+  //             console.log(token)
+  //             AsyncStorage.setItem('push_token', token);
+  //           })
+  //           .catch(error => console.log(error))
+  //       } else {
+  //         messaging.requestPermission()
+  //           .then(respone => console.log(respone))
+  //           .catch(error => { return })
+  //       }
+  //     })
+  //     .catch(error => console.log(error))
+  // }
 
 
 
 
-  PushNotification.configure({
-    onRegister: function (token) {
-      console.log("TOKEN:", token);
-      AsyncStorage.setItem('push_token', token.token)
-    },
-    onNotification: (notification) => {
-      if (notification.isGB) {
-        if (notification.type === 'Small Toast') {
-          renderNotification("Small Toast")
-        }
-        renderNotification("Full Screen")
-      }
-      return;
-    },
-    //     //  notification.finish(PushNotification.FetchResult.NoData);
-    //   // },
-    senderID: "594847270356",
-    permissions: {
-      alert: true,
-      badge: true,
-      sound: true
-    },
-    popInitialNotification: false,
-    requestPermissions: true,
-  });
+  // PushNotification.configure({
+  //   onRegister: function (token) {
+  //     console.log("TOKEN:", token);
+  //     if (Platform.OS === 'android') {
+  //       AsyncStorage.setItem('push_token', token.token)
+  //     }
+  //   },
+  //   onNotification: (notification) => {
+  //     console.log(notification)
+  //     if (notification.data.isGB) {
+        
+  //       this.props.renderNotification(notification)
+  //     }
+  //     PushNotification.localNotification({
+  //       vibrate: true,
+  //       vibration: 300,
+  //       title: notification.message.title,
+  //       message: notification.message.body,
+  //       playSound: true,
+  //     })
+  //   },
+  //   //     //  notification.finish(PushNotification.FetchResult.NoData);
+  //   //   // },
+  //   senderID: "594847270356",
+  //   permissions: {
+  //     alert: true,
+  //     badge: true,
+  //     sound: true
+  //   },
+  //   popInitialNotification: false,
+  //   requestPermissions: true,
+  // });
 };
 
 const localNotification = () => {

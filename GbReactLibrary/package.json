@@ -1,10 +1,10 @@
 {
-  "name": "react-native-gb-react-library",
-  "version": "1.0.0",
+  "name": "react-native-gameball",
+  "version": "1.0.9",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "preinstall":" npm install react-native-firebase grunt grunt-contrib-copy ",
+    "preinstall": " npm install react-native-firebase grunt grunt-contrib-copy react-native-modal axios react-native-push-notification-popup react-native-webview react-native-elements @react-native-community/async-storage",
     "postinstall": "grunt default && react-native link react-native-firebase",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,8 +18,10 @@
     "grunt-contrib-copy"
   ],
   "dependencies": {
-    "grunt": "*",
-    "grunt-contrib-copy": "*"
+    "axios": "^0.19.0",
+    "grunt": "^1.0.4",
+    "grunt-contrib-copy": "^1.0.0",
+    "react-native-modal": "^11.5.3"
   },
   "peerDependencies": {
     "react-native": "^0.41.2",

@@ -1,260 +1,86 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, Platform, Button } from 'react-native';
+import { Platform, ScrollView, RefreshControl, SafeAreaView } from 'react-native';
 import { WebView } from 'react-native-webview';
-import firebase from 'react-native-firebase';
-import CryptoJS from "react-native-crypto-js";
-import Moment from 'moment';
-import GameballSdk from './gameball-sdk';
-import AsyncStorage from '@react-native-community/async-storage';
 
 class GameballWidget extends Component {
-
-  baseUrl = 'https://api.gameball.co/api/Integration';
-  headers = { contentType: 'application/json', APIKey: '8fdfd2dffd-9mnvhu25d6c3d' };
-  salt = '';
-  sdk = null;
-  state = {
-    url: null
-  };
+  static apiKey = '';
+  static lang = '';
+  static playerId = '';
   constructor(props) {
     super(props);
-
-    this.sdk = new GameballSdk();
-
-  }
-  sendMsgToWebview() {
-    this.webview.sendMessage('mg to js file')
-  }
-  onWebviewMsg(data) {
-    console.log("Zaki" + data)
-    alert(JSON.stringify(data));
-    var data = JSON.parse(data);
-    //this.getbotSettings(data);
-  }
-  getbotSettings(data) {
-    this.GetClientBotSettings(data.url, data.data).then((res) => res.json()).then((jsondata) => {
-      //alert(JSON.stringify(jsondata));
-
-      this.wb.postMessage(JSON.stringify(jsondata.response));
-    })
-      .catch((error) => {
-        alert('error');
-        alert(JSON.stringify(error));
-      });
+    this.state = {
+      api: '',
+      refreshing: false
+    }
   }
 
-  componentWillUnmount() {
-    // this is where you unsubscribe
-    // unsubscribe();
-    this.urlSub();
+  static init(api, lang) {
+    GameballWidget.apiKey = api;
+    GameballWidget.lang = lang;
+  }
+  static initialize_player(playerId) {
+    GameballWidget.playerId = playerId;
+  }
+  static getApiKey() {
+    return GameballWidget.apiKey;
+  }
+  onRefreshWidget() {
+    this.webview.reload();
   }
   render() {
     if (this.props) {
-      params = 'displayName=' + this.props.displayName + '&email=' + this.props.email + '&playerId=' + this.props.playerId + '&gender=' + this.props.gender + '&mobileNumber=' + this.props.mobileNumber + '&apiKey=' + this.props.clientId + '&lang=' + this.props.lang + '&dateOfBirth=' + this.props.dateOfBirth + '&idOnly=' + this.props.idOnly;
+      params = 'playerId=' + GameballWidget.playerId + '&apiKey=' + GameballWidget.apiKey + '&lang=' + GameballWidget.lang;
       sourceUri =
         Platform.OS === 'android'
-          ? 'file:///android_asset/Web.bundle/site/index.html?displayName=' + this.props.displayName + '&email=' + this.props.email + '&playerId=' + this.props.playerId + '&gender=' + this.props.gender + '&mobileNumber=' + this.props.mobileNumber + '&apiKey=' + this.props.clientId + '&lang=' + this.props.lang + '&dateOfBirth=' + this.props.dateOfBirth + '&idOnly=' + this.props.idOnly
+          ? 'file:///android_asset/Web.bundle/site/index.html?playerId=' + GameballWidget.playerId + '&apiKey=' + GameballWidget.apiKey + '&lang=' + GameballWidget.lang
           : 'assets/html/Web.bundle/loader.html';
       var injectedJS = `
-      if (!window.location.search) {
-        var link = document.getElementById('progress-bar');
-        link.href = './site/index.html?${params}';
-        link.click();
-      }
-`;
+          if (!window.location.search) {
+            var link = document.getElementById('progress-bar');
+            link.href = './site/index.html?${params}';
+            link.click();
+          }
+    `;
     }
-    this.urlSub = firebase.links().onLink((url) => {
-      var reqObj = {
-        "playerCode": this.getAllUrlParams(url).gbreferral,
-        "playerUniqueId": this.props.externalId,
-        "playerCategoryId": 0,
-        "playerInfo": {
-          "displayName": "string",
-          "firstName": "string",
-          "lastName": "string",
-          "email": "string",
-          "gender": "string",
-          "mobileNumber": "string",
-          "dateOfBirth": "2019-09-03T17:44:31.457Z",
-          "joinDate": "2019-09-03T17:44:31.457Z",
-          "attributes": {
-            "additionalProp1": {},
-            "additionalProp2": {},
-            "additionalProp3": {}
-          }
-        },
-        "sessionInfo": {
-          "host": "string",
-          "url": "string",
-          "referer": "string",
-          "platform": 1,
-          "geolocation": {
-            "latitude": 0,
-            "longitude": 0
-          }
-        },
-        "isMessageTrigger": true
-      }
-
-      this.sdk.addReferral(reqObj, this.headers).then(res => {
-        alert('Added refrrer successfully');
-      }, err => {
-        alert('error');
-      });
-    });
-    firebase.links()
-      .getInitialLink()
-      .then((url) => {
-        if (url) {
-          var reqObj = {
-            "playerCode": this.getAllUrlParams(url).gbreferral,
-            "playerUniqueId": this.props.externalId,
-            "playerCategoryId": 0,
-            "playerInfo": {
-              "displayName": "string",
-              "firstName": "string",
-              "lastName": "string",
-              "email": "string",
-              "gender": "string",
-              "mobileNumber": "string",
-              "dateOfBirth": "2019-09-03T17:44:31.457Z",
-              "joinDate": "2019-09-03T17:44:31.457Z",
-              "attributes": {
-                "additionalProp1": {},
-                "additionalProp2": {},
-                "additionalProp3": {}
-              }
-            },
-            "sessionInfo": {
-              "host": "string",
-              "url": "string",
-              "referer": "string",
-              "platform": 1,
-              "geolocation": {
-                "latitude": 0,
-                "longitude": 0
-              }
-            },
-            "isMessageTrigger": true
-          };
-          this.sdk.addReferral(reqObj, this.headers).then(res => {
-            alert('Added refrrer successfully');
-          }, err => {
-            alert('error');
-          });
-          //alert(url);
-        } else {
-        }
-      });
     return (
-      <View style={{ position: 'absolute', zIndex: 1, backgroundColor: '#000', top: 0, bottom: 0, left: 0, right: 0, width: Dimensions.get('window').width, height: Dimensions.get('window').height - 70 }}>
-        {this.props.children}
-        {this.props.render == true && Platform.OS === 'ios' &&
-          <WebView
-            ref={(component) => { this.wb = component; }}
-            source={{ uri: sourceUri }}
-            javaScriptEnabled={true}
-            injectedJavaScript={injectedJS}
-            originWhitelist={['*']}
-            allowFileAccess={true}
-          />
-        }
-        {this.props.render == true && Platform.OS === 'android' &&
-          <WebView
-            ref={(component) => { this.wb = component; }}
-            source={{ uri: sourceUri }}
-            javaScriptEnabled={true}
-            originWhitelist={['*']}
-            allowFileAccess={true}
-            onMessage={event => {
-              this.onWebviewMsg(event.nativeEvent.data);
-            }}
-          />
-        }
-      </View>
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView
+          style={{ flex: 1 }}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ flex: 1 }}
+          refreshControl={
+            <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefreshWidget.bind(this)} />
+          }
+        >
+          {Platform.OS === 'ios' &&
+            <WebView
+              ref={(webview) => this.webview = webview}
+              source={{ uri: sourceUri }}
+              javaScriptEnabled={true}
+              startInLoadingState
+              useWebKit={true}
+              injectedJavaScript={injectedJS}
+              originWhitelist={['*']}
+              allowFileAccess={true}
+            />
+          }
+          {Platform.OS === 'android' &&
+            <WebView
+              ref={(webview) => this.webview = webview}
+              source={{ uri: sourceUri }}
+              javaScriptEnabled={true}
+              originWhitelist={['*']}
+              allowFileAccess={true}
+              startInLoadingState
+              useWebKit={true}
+            />
+          }
+        </ScrollView>
+      </SafeAreaView>
     );
-  }
-
-  makeRequest(url, method, headers, data) {
-    var obj = {
-      method: method,
-      headers: headers,
-      body: JSON.stringify(data)
-    }
-    return fetch(url, obj);
-  };
-
-
-  addBodyHash(data, salt) {
-    if (data.PlayerUniqueID) {
-      data["BodyHashed"] = CryptoJS.AES.encrypt(data.PlayerUniqueID + ':' + Moment(new Date(), 'yy MM dd HH mm ss') + ':' + salt, 'secret key 123').toString();
-    }
-    return data;
-  }
-  getAllUrlParams(url) {
-    // get query string from url (optional) or window
-    var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
-
-    // we'll store the parameters here
-    var obj = {};
-
-    // if query string exists
-    if (queryString) {
-
-      // stuff after # is not part of query string, so get rid of it
-      queryString = queryString.split('#')[0];
-
-      // split our query string into its component parts
-      var arr = queryString.split('&');
-
-      for (var i = 0; i < arr.length; i++) {
-        // separate the keys and the values
-        var a = arr[i].split('=');
-
-        // set parameter name and value (use 'true' if empty)
-        var paramName = a[0];
-        var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
-
-        // (optional) keep case consistent
-        paramName = paramName.toLowerCase();
-        if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
-
-        // if the paramName ends with square brackets, e.g. colors[] or colors[2]
-        if (paramName.match(/\[(\d+)?\]$/)) {
-
-          // create key if it doesn't exist
-          var key = paramName.replace(/\[(\d+)?\]/, '');
-          if (!obj[key]) obj[key] = [];
-
-          // if it's an indexed array e.g. colors[2]
-          if (paramName.match(/\[\d+\]$/)) {
-            // get the index value and add the entry at the appropriate position
-            var index = /\[(\d+)\]/.exec(paramName)[1];
-            obj[key][index] = paramValue;
-          } else {
-            // otherwise add the value to the end of the array
-            obj[key].push(paramValue);
-          }
-        } else {
-          // we're dealing with a string
-          if (!obj[paramName]) {
-            // if it doesn't exist, create property
-            obj[paramName] = paramValue;
-          } else if (obj[paramName] && typeof obj[paramName] === 'string') {
-            // if property does exist and it's a string, convert it to an array
-            obj[paramName] = [obj[paramName]];
-            obj[paramName].push(paramValue);
-          } else {
-            // otherwise add the property
-            obj[paramName].push(paramValue);
-          }
-        }
-      }
-    }
-
-    return obj;
   }
 
 }
 
-export default GameballWidget;
+export default (GameballWidget);

@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* gbreactexampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* gbreactexampleTests.m */; };
-		04968A4D2357B42A00D521BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04968A4C2357B42A00D521BB /* GoogleService-Info.plist */; };
-		04FEC6A8234C004900AE9D27 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04FEC6A7234C004900AE9D27 /* GoogleService-Info.plist */; };
+		042CAC4823645E380078AFCC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 042CAC4723645E380078AFCC /* GoogleService-Info.plist */; };
 		0EC8DDF2B939106E86952536 /* libPods-gbreactexample-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7C06F0DAA2210EB4A31AB43 /* libPods-gbreactexample-tvOS.a */; };
 		101A328B0A624985B0C65A1B /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E1232CE6C4F4909A739D2CE /* AntDesign.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -17,13 +16,13 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		23B08CAB918545B882291C49 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CC11ACEA94940D58C18660F /* FontAwesome.ttf */; };
+		2BC2051CEA8A5077D5A8736B /* libPods-gbreactexample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 107064AF03307A7C976701A3 /* libPods-gbreactexample.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* gbreactexampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* gbreactexampleTests.m */; };
 		3390A04739AD423E9859965F /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90B7283052A44AA2BF519CE0 /* Entypo.ttf */; };
 		355FBD5292CE4372B305314A /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95C12C546D854667A404CEE2 /* FontAwesome5_Brands.ttf */; };
-		59EDF39CCE0351A2364A3908 /* libPods-gbreactexample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 107064AF03307A7C976701A3 /* libPods-gbreactexample.a */; };
 		6CEDF757D8914A1F9AA6AA74 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C35A187451C046DC9E81DA9B /* FontAwesome5_Solid.ttf */; };
 		7FB81E0182B24F06AAD26FB4 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 570957F48CE54AFEB579A0E1 /* Zocial.ttf */; };
 		9BBC04A29E9E43309F5D482E /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1153F92407224E12A374923C /* Ionicons.ttf */; };
@@ -62,10 +61,10 @@
 		00E356EE1AD99517003FC87E /* gbreactexampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gbreactexampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* gbreactexampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gbreactexampleTests.m; sourceTree = "<group>"; };
+		042CAC4723645E380078AFCC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		043290E823527E5B00DEF2A7 /* GoogleService-Info-3.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info-3.plist"; path = "../../../../../../Downloads/GoogleService-Info-3.plist"; sourceTree = "<group>"; };
-		04968A4C2357B42A00D521BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		04B531C52355357300ECFC14 /* gbreactexample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = gbreactexample.entitlements; path = gbreactexample/gbreactexample.entitlements; sourceTree = "<group>"; };
-		04FEC6A7234C004900AE9D27 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		04F1C3842361A053008DD730 /* gbreactexampleDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = gbreactexampleDebug.entitlements; path = gbreactexample/gbreactexampleDebug.entitlements; sourceTree = "<group>"; };
 		107064AF03307A7C976701A3 /* libPods-gbreactexample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gbreactexample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1153F92407224E12A374923C /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		1342A0E89CCEC071C3902B18 /* libPods-gbreactexampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gbreactexampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,7 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59EDF39CCE0351A2364A3908 /* libPods-gbreactexample.a in Frameworks */,
+				2BC2051CEA8A5077D5A8736B /* libPods-gbreactexample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,9 +163,10 @@
 		13B07FAE1A68108700A75B9A /* gbreactexample */ = {
 			isa = PBXGroup;
 			children = (
+				042CAC4723645E380078AFCC /* GoogleService-Info.plist */,
+				04F1C3842361A053008DD730 /* gbreactexampleDebug.entitlements */,
 				04B531C52355357300ECFC14 /* gbreactexample.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
-				04FEC6A7234C004900AE9D27 /* GoogleService-Info.plist */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -238,7 +238,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				04968A4C2357B42A00D521BB /* GoogleService-Info.plist */,
 				F69350812336938000F9E6FE /* assets */,
 				13B07FAE1A68108700A75B9A /* gbreactexample */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -296,8 +295,8 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				04B531C72355362B00ECFC14 /* ShellScript */,
 				FD7B979A1695F89EC17D423D /* [CP] Copy Pods Resources */,
+				042CAC492364EF070078AFCC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -358,12 +357,12 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = MW5ZRTEPVV;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = X3DGB26Y5K;
+						ProvisioningStyle = Manual;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = E33T68GW9Q;
+						DevelopmentTeam = X3DGB26Y5K;
 						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -412,7 +411,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F69350822336938100F9E6FE /* assets in Resources */,
-				04FEC6A8234C004900AE9D27 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				101A328B0A624985B0C65A1B /* AntDesign.ttf in Resources */,
@@ -429,9 +427,9 @@
 				C892078C6245493BB65ECD6F /* MaterialCommunityIcons.ttf in Resources */,
 				B6EA15836AC44DEDB9667FE4 /* MaterialIcons.ttf in Resources */,
 				A001C99B2F9046BEB81B3272 /* Octicons.ttf in Resources */,
+				042CAC4823645E380078AFCC /* GoogleService-Info.plist in Resources */,
 				B24FB5DCE1254EF9BE593A1E /* SimpleLineIcons.ttf in Resources */,
 				7FB81E0182B24F06AAD26FB4 /* Zocial.ttf in Resources */,
-				04968A4D2357B42A00D521BB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,7 +465,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		04B531C72355362B00ECFC14 /* ShellScript */ = {
+		042CAC492364EF070078AFCC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -482,7 +480,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n./Fabric.framework/run b693292e74a5cae93917dc175d219f4ccb043130 4d70888cf720ba472841febc8a779e118d3382bafd9721ce8f2073c67676bc85\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n./Fabric.framework/run 06a80cd0fd65d4519e103be7102ab64d7146a3c7 3c3742ec4b042e54e71a7923ebceeee3e6ea6c0d0cf3d44ded6516dd4c2f43ef\n";
 		};
 		167F71F58F1E75E899047667 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -744,8 +742,8 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MW5ZRTEPVV;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = X3DGB26Y5K;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -773,9 +771,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = X3DGB26Y5K;
 				INFOPLIST_FILE = gbreactexampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -797,23 +795,24 @@
 			baseConfigurationReference = 850CAAA745B1250511F2D249 /* Pods-gbreactexample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = gbreactexample/gbreactexample.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = gbreactexample/gbreactexampleDebug.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = E33T68GW9Q;
+				DEVELOPMENT_TEAM = X3DGB26Y5K;
 				INFOPLIST_FILE = gbreactexample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.11;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.zaki.martin;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactNative.gameball.dev;
 				PRODUCT_NAME = gbreactexample;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = DevReactNativeGameBall;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -824,21 +823,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = gbreactexample/gbreactexample.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = E33T68GW9Q;
+				DEVELOPMENT_TEAM = X3DGB26Y5K;
 				INFOPLIST_FILE = gbreactexample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.11;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.zaki.martin;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactNative.gameball.dev;
 				PRODUCT_NAME = gbreactexample;
-				PROVISIONING_PROFILE_SPECIFIER = ReactGameBall;
+				PROVISIONING_PROFILE_SPECIFIER = DevReactNativeGameBall;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

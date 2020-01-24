@@ -1,33 +1,50 @@
-import React, { Component } from 'react';
 import axios from 'axios';
+import GameballWidget from './gameball-widget';
+const baseUrl = 'https://api.gameball.co/api/v1.0/Integrations';
+var playerId = ''
 
 
-class GameballSdk extends Component {
-  baseUrl = 'https://gb-api.azurewebsites.net/api/v1.0/Integrations';
-  constructor(props) {
-    super(props);
-  }
-
-  addReferral(data, headers) {
-    return this.makeRequest(this.baseUrl + '/Referral', 'POST', headers, data);
-
-  }
-  sendEvent(data, headers) {
-    return this.makeRequest(this.baseUrl + '/Action', 'POST', headers, data);
-
-  }
-  registerUser(data, headers) {
-    return this.makeRequest(this.baseUrl + '/InitializePlayer', 'POST', headers, data);
-  }
-
-  makeRequest(url, method, headers, data) {
-    var config = {
-      headers: {
-        APIKey: headers,
-      }
-    };
-    axios.post(url, data, config).then(res => console.log(res)).catch(err => console.log(err.response))
-  };
+const addReferral = (data) => {
+  playerId = data.playerUniqueId;
+  GameballWidget.initialize_player(playerId);
+  return makeRequest(baseUrl + '/Referral', data);
 }
 
-export default GameballSdk;
+async function sendEvent(data) {
+
+  const sendEventJson = {
+    "events": data,
+    "playerUniqueId": playerId,
+    "sessionInfo": {
+      "platform": 4
+    }
+  }
+  return makeRequest(baseUrl + '/Action', sendEventJson);
+
+}
+async function registerUser(data) {
+  playerId = data.playerUniqueId;
+  GameballWidget.initialize_player(playerId);
+  return makeRequest(baseUrl + '/InitializePlayer', data);
+}
+
+async function makeRequest(url, data) {
+  let apiKey = GameballWidget.getApiKey()
+  var config = {
+    headers: {
+      APIKey: apiKey,
+    }
+  };
+  return axios.post(url, data, config);
+};
+const getReferralCode = (url) => {
+  let index = url.indexOf("=");
+  index = index + 1;
+  return (url.substring(index))
+}
+export {
+  registerUser,
+  addReferral,
+  sendEvent,
+  getReferralCode
+}

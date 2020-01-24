@@ -16,7 +16,7 @@ import com.facebook.soloader.SoLoader;
 import io.invertase.firebase.links.RNFirebaseLinksPackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import java.util.List;
-
+//import com.reactlibrary.RNGbReactLibraryPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -31,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
       @SuppressWarnings("UnnecessaryLocalVariable")
       List<ReactPackage> packages = new PackageList(this).getPackages();
       packages.add(new RNFirebaseLinksPackage());
+//      packages.add(new RNGbReactLibraryPackage());
 //       packages.add(new RNFirebaseMessagingPackage());
        return packages;
     }

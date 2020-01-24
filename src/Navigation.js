@@ -1,38 +1,68 @@
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import React from 'react';
 import FirstScreen from './Screens/1';
 import SecondScreen from './Screens/2';
 import ThirdScreen from './Screens/3';
-import FourthScreen  from './Screens/4';
-import {  createAppContainer } from "react-navigation";
-import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer, createSwitchNavigator, createBottomTabNavigator, createStackNavigator } from "react-navigation";
+import LoadingScreen from './Screens/LoadingScreen';
+import { Icon } from 'react-native-elements';
+import FourthScreen from './Screens/4';
 
-const FirstScreenStack = createStackNavigator({
-  FirstScreen:{
-    screen: FirstScreen
-  },
-  FourthScreen: {
-    screen: FourthScreen
-  }
-})
 const BottomNavigator = createBottomTabNavigator({
-  FirstScreen: {
-    screen: FirstScreenStack,
-    navigationOptions: {
-      title:"1"
-    },
-  },
   SecondScreen: {
     screen: SecondScreen,
     navigationOptions: {
-      title:"2"
+      title: "Rewards",
+      tabBarIcon: ({ tintColor }) => (
+        <Icon
+          name="star"
+          color={tintColor}
+          type='font-awesome'
+          size={20}
+        />
+      )
     },
   },
   ThirdScreen: {
     screen: ThirdScreen,
     navigationOptions: {
-      title:"3"
+      title: "Event",
+      tabBarIcon: ({ tintColor }) => (
+        <Icon
+          name="exclamation"
+          color={tintColor}
+          type='font-awesome'
+          size={20}
+        />
+      )
     },
   },
-})
+}
+  // , {
+  //   tabBarOptions: {
+  //     style: {
+  //       width: '100%',
+  //       position: 'absolute',
+  //       zIndex: 1,
+  //     }
+  //   }
+  // }
+)
 
-export default createAppContainer(BottomNavigator);
+const AppNavigator = createSwitchNavigator(
+  {
+    Links: { screen: FirstScreen, navigationOptions: { header: null } },
+    Loading: {
+      screen: LoadingScreen,
+      navigationOptions: {
+        header: null
+      }
+    },
+    App: BottomNavigator,
+    SetClient: FourthScreen
+  },
+  {
+    initialRouteName: 'SetClient',
+  },
+)
+
+export default createAppContainer(AppNavigator);

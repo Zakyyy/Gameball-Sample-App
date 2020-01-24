@@ -69,35 +69,34 @@
       }
       return obj;
     }
-  window.GbLoadInit = function(){
-      if (getAllUrlParams().idonly) {
-        GbSdk.init({
-          playerUniqueId: getAllUrlParams().playerid,
-          lang: getAllUrlParams().lang ? getAllUrlParams().lang : 'eng',
-          APIKey: getAllUrlParams().apikey,
-          defaultOpen: true,
-          mobile: true,
-        });
-      } else {
-        GbSdk.init({
-          playerUniqueId: getAllUrlParams().playerid,
+  window.GbLoadInit = function () {
+    GbSdk.init({
+      playerUniqueId: getAllUrlParams().playerid,
+      lang: getAllUrlParams().lang ? getAllUrlParams().lang : 'eng',
+      APIKey: getAllUrlParams().apikey,
+      defaultOpen: true,
+      mobile: true
+    });
 
-          playerAttributes: {
-            displayName: getAllUrlParams().displayname,
-            email: getAllUrlParams().email ? getAllUrlParams().email : '',
-            dateOfBirth: getAllUrlParams().dateofbirth ? getAllUrlParams().dateofbirth : '',
-            gender: getAllUrlParams().gender ? getAllUrlParams().gender : '',
-            mobileNumber: getAllUrlParams().mobilenumber ? getAllUrlParams().mobilenumber : '',
-          },
-          lang: getAllUrlParams().lang ? getAllUrlParams().lang : 'eng',
-          APIKey: getAllUrlParams().apikey,
-          defaultOpen: true,
-          mobile: true,
-        });
-      }
-  };
+  }
+  function testEvent() {
+
+    var event = document.getElementById("txt_area").value;
+    var obj = JSON.parse(event);
+
+    GbSdk.sendEvent(obj);
+  }
+  function test(type) {
+    GbSdk.sendEvent(type);
+  }
+  function check_me(e) {
+    GbSdk.toggle(e);
+  }
 </script>
-<script defer src="https://assets.gameball.co/uat/widget/js/gameball-init.min.js"></script>
+<script async defer src="./gameball-init.min.js"></script>
+<script>
+
+</script>
 
 
 </head>

@@ -1,28 +1,34 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
-import { GameballWidget } from '../../GbReactLibrary';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import { GameballSdk } from 'react-native-gameball';
+import SafeAreaView from 'react-native-safe-area-view';
+import { connect } from 'react-redux';
+import { add_player_id } from '../actions/AuthActions';
 class FirstScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       language: 'en',
       show: false,
-      displayName: '',
-      email: '',
-      gender: '',
-      mobileNumber: '',
+      displayName: 'sjsjjs',
+      email: 'sajsaa@sasaa.com',
+      gender: 'M',
+      mobileNumber: '01099999999',
       dateOfBirth: '2019-10-13T20:57:36.761Z',
-      apiKey: '8fdfd2dffd-9mnvhu25d6c3d',
-      playerId: ''
+      playerId: 'test-1-screen',
+      refer: false
     };
-    this.api = new GameballWidget();
   }
-
-  async registerPlayer() {
+  componentDidMount() {
+    let code = this.props.navigation.getParam('gbreferral');
+    code ? this.setState({ refer: true }) : this.setState({ refer: false })
+  }
+  async addReferral() {
     let { playerId, apiKey, displayName, email, gender, mobileNumber, dateOfBirth } = this.state;
-    this.api.sdk.registerUser({
+    let code = this.props.navigation.getParam('gbreferral');
+    GameballSdk.addReferral({
+      "playerCode": code,
       "playerUniqueId": playerId,
       "deviceToken": await AsyncStorage.getItem('push_token'),
       "osType": Platform.OS === 'ios' ? 'ios' : 'android',
@@ -34,100 +40,103 @@ class FirstScreen extends Component {
         "dateOfBirth": dateOfBirth,
         "joinDate": new Date(),
       }
-    }, apiKey);
+    });
+    this.props.navigation.navigate('App');
+  }
+
+  async registerPlayer() {
+    console.log("sss")
+    console.log("register")
+    let { playerId, displayName, email, gender, mobileNumber, dateOfBirth } = this.state;
+    GameballSdk.registerUser({
+      "playerUniqueId": playerId,
+      // "playerTypeId": 1,
+      "deviceToken": await AsyncStorage.getItem('push_token'),
+      "osType": Platform.OS === 'ios' ? 'ios' : 'android',
+      "playerAttributes": {
+        "displayName": displayName,
+        "email": email,
+        "gender": gender,
+        "mobileNumber": mobileNumber,
+        "dateOfBirth": dateOfBirth,
+        "joinDate": new Date(),
+      }
+    }).then(res => {
+      console.log(res)
+      alert("success")
+      // this.props.add_player_id(this.props.navigation)
+      this.props.navigation.navigate('App')
+    }
+    ).catch(err => console.log(err.response))
+
   }
   render() {
     return (
-      <View style={{ flex: 1, paddingTop: 20 }}>
-        <Text style={{ fontSize: 20 }}>Register Player</Text>
+      <SafeAreaView style={{ flex: 1 }}>
+        <Text style={{ fontSize: 20, marginLeft: 20, marginTop: 20 }}>Register Player</Text>
         <View style={{ flex: 1, flexDirection: 'column', padding: 20, paddingTop: 5 }}>
-          <Text>Required Info.</Text>
-          <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => this.setState({ apiKey: text })}
-            value={this.state.apiKey}
-            placeholder="apiKey"
-          />
-          <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => this.setState({ playerId: text })}
-            value={this.state.playerId}
-            placeholder="playerId"
-          />
-          <Text>Optional</Text>
-          <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => this.setState({ displayName: text })}
-            value={this.state.displayName}
-            placeholder="display name"
-          />
+          <View style={{ marginTop: 20 }}>
+            <Text>Required Info.</Text>
+            <TextInput
+              style={{ height: 40, borderColor: 'gray', borderWidth: 1, color: 'black' }}
+              onChangeText={text => this.setState({ playerId: text })}
+              value={this.state.playerId}
+              placeholder="playerId"
+              placeholderTextColor="black"
+            />
+          </View>
+          <View style={{ marginTop: 20 }}>
+            <Text>Optional</Text>
+            <TextInput
+              style={{ height: 40, borderColor: 'gray', borderWidth: 1, color: 'black' }}
+              onChangeText={text => this.setState({ displayName: text })}
+              value={this.state.displayName}
+              placeholder="display name"
+              placeholderTextColor="black"
 
-          <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => this.setState({ email: text })}
-            value={this.state.email}
-            placeholder="email"
-          />
-          <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => this.setState({ gender: text })}
-            value={this.state.gender}
-            placeholder="gender"
-          />
-          <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => this.setState({ mobileNumber: text })}
-            value={this.state.mobileNumber}
-            placeholder="mobile number"
-          />
-          <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => this.setState({ dateOfBirth: text })}
-            value={this.state.dateOfBirth}
-            placeholder="birthdate"
-          />
-          <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => this.setState({ language: text })}
-            value={this.state.language}
-            placeholder="language"
-          />
-          {!this.state.show && <Button
-            title="Register Player"
-            onPress={() => this.registerPlayer()}
-          />}
+            />
+
+            <TextInput
+              style={{ height: 40, borderColor: 'gray', borderWidth: 1, color: 'black' }}
+              onChangeText={text => this.setState({ email: text })}
+              value={this.state.email}
+              placeholder="email"
+              placeholderTextColor="black"
+            />
+
+            <TextInput
+              style={{ height: 40, borderColor: 'gray', borderWidth: 1, color: 'black' }}
+              onChangeText={text => this.setState({ gender: text })}
+              value={this.state.gender}
+              placeholder="gender"
+              placeholderTextColor="black"
+            />
+
+            <TextInput
+              style={{ height: 40, borderColor: 'gray', borderWidth: 1, color: 'black' }}
+              onChangeText={text => this.setState({ mobileNumber: text })}
+              value={this.state.mobileNumber}
+              placeholder="mobile number"
+              placeholderTextColor="black"
+            />
+
+            <TextInput
+              style={{ height: 40, borderColor: 'gray', borderWidth: 1, color: 'black' }}
+              onChangeText={text => this.setState({ dateOfBirth: text })}
+              value={this.state.dateOfBirth}
+              placeholder="birthdate"
+              placeholderTextColor="black"
+
+            />
+            {!this.state.show && <Button
+              title={this.state.refer ? "Refer" : "Register Player"}
+              onPress={() =>
+                this.state.refer ? this.addReferral() : this.registerPlayer()}
+            />}
+          </View>
         </View>
-        {!this.state.show &&
-          <Button
-            title="Launch Widget"
-            onPress={() => this.setState({ show: !this.state.show })}
-          />}
-        <Button
-          title="Launch in Separate Screen"
-          onPress={() => {
-            this.props.navigation.navigate('FourthScreen', {
-              apiKey: this.state.apiKey,
-              playerId: this.state.playerId
-            })
-          }}
-        />
-        {this.state.show &&
-          <GameballWidget style={{ position: 'absolute', zIndex: 999 }}
-            clientId={this.state.apiKey}
-            lang={this.state.language}
-            playerId={this.state.playerId}
-            displayName={this.state.displayName}
-            dateOfBirth={this.state.dateOfBirth}
-            email={this.state.email}
-            gender={this.state.gender}
-            render={this.state.show}
-            mobileNumber={this.state.mobileNumber}
-            idOnly={false}
-          />
-        }
-      </View>
-    )
+      </SafeAreaView>)
   }
 }
 
-export default FirstScreen;
+export default connect(null, { add_player_id })(FirstScreen);

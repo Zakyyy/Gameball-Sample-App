@@ -1,74 +1,100 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { GameballWidget } from '../../GbReactLibrary';
-import NotificationComponent from '../NotificationComponent';
-
+import { GameballSdk, InAppNotification } from 'react-native-gameball';
+import { logout } from '../actions/AuthActions';
+import { connect } from 'react-redux';
 class ThirdScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      apiKey: '8fdfd2dffd-9mnvhu25d6c3d',
-      playerId: '',
-      show: false
+      eventJson: '{"ziko":{}}'
     }
-    this.api = new GameballWidget();
   }
   async sendEventPressFunction() {
-    let token = await AsyncStorage.getItem('push_token');
-    console.log(token)
-    this.api.sdk.sendEvent({
-      "events": {
-        "review": {}
-      },
-      "playerUniqueId": this.state.playerId
-    }, this.state.apiKey);
+    GameballSdk.sendEvent({
+      "limited": {}
+    }).then(res => {
+      console.log(res)
+    }).catch(err => alert(err.response))
+  }
+  logout() {
+    this.props.logout(this.props.navigation);
+  }
+  async sendEventJson() {
+    let newStr = (this.state.eventJson).replace(/”/g, '"');
+    newStr = newStr.replace(/“/g, '"');
+    let json = JSON.parse(newStr)
+    console.log(json)
+    GameballSdk.sendEvent(
+      json
+    ).then(res => console.log(res)).catch(err => console.log(err.response))
+  }
+  async sendEvent3PressFunction() {
+    GameballSdk.sendEvent({
+      "case3": {}
+    }).then(res => {
+      console.log(res)
+    }).catch(err => alert(err.response))
+  }
+  async sendEvent2PressFunction() {
+    GameballSdk.sendEvent({
+      "case2": {}
+    }).then(res => {
+      console.log(res)
+    }).catch(err => alert(err.response))
+  }
+  async sendEventRPressFunction() {
+    GameballSdk.sendEvent({
+      "review": {}
+    }).then(res => {
+      console.log(res)
+    }).catch(err => alert(err.response))
   }
   render() {
     return (
       <View style={{ flex: 1, padding: 20, paddingTop: 50 }}>
         <Text style={{ fontSize: 18 }}> Sending Event</Text>
-        <View style={{ paddingTop: 20 }}>
+        <View style={{ paddingTop: 20, justifyContent: 'space-between', }}>
           <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => this.setState({ apiKey: text })}
-            value={this.state.apiKey}
-            placeholder="apiKey"
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1, color: 'black' }}
+            onChangeText={text => this.setState({ eventJson: text })}
+            value={this.state.eventJson}
+            placeholderTextColor="grey"
+            autoCorrect={false}
+            keyboardType={"default"}
           />
-          <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => this.setState({ playerId: text })}
-            value={this.state.playerId}
-            placeholder="playerId"
+          <Button
+            title={"Send Event Json"}
+            onPress={() => this.sendEventJson()}
           />
-          {!this.state.show &&
-            <Button
-              title={"Send Event"}
-              onPress={() => this.sendEventPressFunction()}
-            />}
-          {!this.state.show && <Button
-            title={"open widget"}
-            onPress={() => this.setState({ show: !this.state.show })}
-          />}
-        </View>
-        {this.state.show &&
-          <GameballWidget
-            clientId={this.state.apiKey}
-            playerId={this.state.playerId}
-            render={this.state.show}
-            idOnly={true}
-          >
-            <Button
-              title={"close widget"}
-              onPress={() => this.setState({ show: !this.state.show })}
-            />
+          <Button
+            title={"Send Event Case3"}
+            onPress={() => this.sendEvent3PressFunction()}
+          />
+          <Button
+            title={"Send Event Case2"}
+            onPress={() => this.sendEvent2PressFunction()}
+          />
+          <Button
+            title={"Send Event Review"}
+            onPress={() => this.sendEventRPressFunction()}
+          />
+          <Button
+            title={"Send Event Limited"}
+            onPress={() => this.sendEventPressFunction()}
+          />
 
-          </GameballWidget>
-        }
+
+          <Button
+            title={"log out"}
+            onPress={() => this.logout()}
+          />
+        </View>
 
       </View>
     )
   }
 }
 
-export default ThirdScreen;
+export default connect(null, { logout })(ThirdScreen);
